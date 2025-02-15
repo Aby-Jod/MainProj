@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        google()   // Firebase repository
+        mavenCentral() // Central repository for other dependencies
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.0.2"  // Gradle plugin for Android
+        classpath "com.google.gms:google-services:4.3.15"  // Google services plugin for Firebase
+        // Add any other required dependencies for your project
+    }
+}
+
+allprojects {
+    repositories {
+        google()  // Firebase repository
+        mavenCentral() // Central repository
+    }
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir  // Clean build task
+}
+
+apply plugin: 'com.android.application'  // Apply Android app plugin
+apply plugin: 'com.google.gms.google-services'  // Apply Firebase plugin
+
+android {
+    compileSdkVersion 33  // Make sure to match the compileSdkVersion with your app
+    defaultConfig {
+        applicationId "com.yourapp.habittracker"  // Replace with your app's package name
+        minSdkVersion 21  // Minimum SDK version your app supports
+        targetSdkVersion 33  // Target SDK version
+        versionCode 1  // Version code for Android build
+        versionName "1.0.0"  // Version name
+    }
+    buildTypes {
+        release {
+            minifyEnabled false  // Disable minification for release builds
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'  // Proguard settings
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:1.10.0"  // Core KTX library
+    implementation "androidx.appcompat:appcompat:1.6.1"  // AppCompat support
+    implementation "com.google.firebase:firebase-auth:21.1.0"  // Firebase Auth
+    implementation "com.google.firebase:firebase-firestore:24.4.0"  // Firebase Firestore
+    implementation "com.google.firebase:firebase-core:21.1.0"  // Firebase Core
+    // Add any other dependencies you need for your app
+}
